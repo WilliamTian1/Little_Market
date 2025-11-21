@@ -77,7 +77,7 @@ class Whale(polysim.Agent):
         if not self.has_dumped:
             print(f"WHALE DUMPING AT TICK!")
             # Massive Sell Order to crash the price
-            self.place_limit_order(polysim.Side.SELL, 1.0, 500.0) 
+            self.place_limit_order(polysim.Side.SELL, 13.0, 50000.0) 
             self.has_dumped = True
 
     def on_trade(self, trade):
