@@ -24,6 +24,7 @@ FetchContent_MakeAvailable(pybind11)
 # Define the core library
 add_library(polysim_core
     src/core/OrderBook.cpp
+    src/core/Engine.cpp
 )
 target_include_directories(polysim_core PUBLIC src/core)
 

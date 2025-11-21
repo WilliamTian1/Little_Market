@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <functional>
 
 namespace polysim {
 
@@ -24,10 +25,25 @@ public:
         std::cout << "[Agent " << agent_id << "] " << message << std::endl;
     }
 
+    void set_order_router(std::function<void(const Order&)> router) {
+        order_router_ = router;
+    }
+
+    void place_limit_order(Side side, double price, double quantity) {
+        if (order_router_) {
+            // ID will be assigned by the Engine, so we can pass 0 here
+            Order order{0, agent_id, side, price, quantity}; 
+            order_router_(order);
+        }
+    }
+
     // Data Members
     uint64_t agent_id;
     double cash;
     double inventory;
+
+protected:
+    std::function<void(const Order&)> order_router_;
 };
 
 } // namespace polysim

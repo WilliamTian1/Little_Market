@@ -2,6 +2,7 @@
 #include <pybind11/stl.h>
 #include "OrderBook.h"
 #include "Agent.h"
+#include "Engine.h"
 
 namespace py = pybind11;
 using namespace polysim;
@@ -64,17 +65,25 @@ PYBIND11_MODULE(polysim, m) {
     // Bind OrderBook Class
     py::class_<OrderBook>(m, "OrderBook")
         .def(py::init<>())
-        .def("add_order", &OrderBook::AddOrder);
+        .def("add_order", &OrderBook::AddOrder)
+        .def("get_snapshot", &OrderBook::get_snapshot);
 
     // Bind Agent Class with Trampoline
-    py::class_<Agent, PyAgent>(m, "Agent")
+    py::class_<Agent, PyAgent, std::shared_ptr<Agent>>(m, "Agent")
         .def(py::init<uint64_t, double, double>())
         .def("on_tick", &Agent::on_tick)
         .def("on_trade", &Agent::on_trade)
         .def("log", &Agent::log)
+        .def("place_limit_order", &Agent::place_limit_order)
         .def_readwrite("agent_id", &Agent::agent_id)
         .def_readwrite("cash", &Agent::cash)
         .def_readwrite("inventory", &Agent::inventory);
+
+    // Bind Engine Class
+    py::class_<Engine>(m, "Engine")
+        .def(py::init<>())
+        .def("add_agent", &Engine::add_agent)
+        .def("run", &Engine::run);
 
     // Bind Helper Function
     m.def("test_agent_callback", &test_agent_callback);

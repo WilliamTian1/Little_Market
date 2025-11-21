@@ -178,6 +178,30 @@ src/bindings/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\polysim.dir\build.make CMakeFiles/polysim.dir/src/bindings/main.cpp.s
 .PHONY : src/bindings/main.cpp.s
 
+src/core/Engine.obj: src/core/Engine.cpp.obj
+.PHONY : src/core/Engine.obj
+
+# target to build an object file
+src/core/Engine.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\polysim_core.dir\build.make CMakeFiles/polysim_core.dir/src/core/Engine.cpp.obj
+.PHONY : src/core/Engine.cpp.obj
+
+src/core/Engine.i: src/core/Engine.cpp.i
+.PHONY : src/core/Engine.i
+
+# target to preprocess a source file
+src/core/Engine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\polysim_core.dir\build.make CMakeFiles/polysim_core.dir/src/core/Engine.cpp.i
+.PHONY : src/core/Engine.cpp.i
+
+src/core/Engine.s: src/core/Engine.cpp.s
+.PHONY : src/core/Engine.s
+
+# target to generate assembly for a file
+src/core/Engine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\polysim_core.dir\build.make CMakeFiles/polysim_core.dir/src/core/Engine.cpp.s
+.PHONY : src/core/Engine.cpp.s
+
 src/core/OrderBook.obj: src/core/OrderBook.cpp.obj
 .PHONY : src/core/OrderBook.obj
 
@@ -240,6 +264,9 @@ help:
 	@echo ... src/bindings/main.obj
 	@echo ... src/bindings/main.i
 	@echo ... src/bindings/main.s
+	@echo ... src/core/Engine.obj
+	@echo ... src/core/Engine.i
+	@echo ... src/core/Engine.s
 	@echo ... src/core/OrderBook.obj
 	@echo ... src/core/OrderBook.i
 	@echo ... src/core/OrderBook.s

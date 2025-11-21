@@ -3,6 +3,34 @@
 
 namespace polysim {
 
+std::map<double, double> OrderBook::get_snapshot() const {
+    std::map<double, double> snapshot;
+
+    // Aggregate Bids
+    for (const auto& [price, orders] : bids_) {
+        double total_qty = 0;
+        for (const auto& order : orders) {
+            total_qty += order.quantity;
+        }
+        if (total_qty > 0) {
+            snapshot[price] = total_qty;
+        }
+    }
+
+    // Aggregate Asks
+    for (const auto& [price, orders] : asks_) {
+        double total_qty = 0;
+        for (const auto& order : orders) {
+            total_qty += order.quantity;
+        }
+        if (total_qty > 0) {
+            snapshot[price] = total_qty; // Note: In a real LOB, we might separate bids/asks, but prompt asked for a simple map
+        }
+    }
+
+    return snapshot;
+}
+
 std::vector<Trade> OrderBook::AddOrder(Order order) {
     std::vector<Trade> trades;
 
