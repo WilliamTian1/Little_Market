@@ -4,6 +4,13 @@ import os
 # Ensure the current directory is in the path so we can find the compiled module
 sys.path.append(os.getcwd())
 
+# Add MinGW bin directory to DLL search path for Windows
+if os.name == 'nt':
+    try:
+        os.add_dll_directory(r"C:\msys64\ucrt64\bin")
+    except Exception:
+        pass
+
 try:
     import polysim
     print(f"Successfully imported polysim module: {polysim}")
